@@ -49,3 +49,6 @@ $RECYCLE.BIN/
 
 # local e2e artefacts
 e2e-output/
+
+# JetBrains IDE settings
+.idea/
