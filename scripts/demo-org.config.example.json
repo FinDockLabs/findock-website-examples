@@ -1,0 +1,60 @@
+{
+    "targetOrg": "findock-website-examples",
+    "templatesRepo": "../payment-experiences-templates",
+    "donationTemplate": "donation-fundraising",
+    "guestLocale": "en_GB",
+    "guestLanguage": "en_US",
+    "websites": [
+        "https://findock-gibbons.netlify.app",
+        "https://canopy-gibbon-trust.netlify.app"
+    ],
+    "packages": [
+        {
+            "name": "FinDock",
+            "namespace": "cpm",
+            "versionId": ""
+        },
+        {
+            "name": "FinDock | ProcessingHub",
+            "namespace": "proh",
+            "versionId": ""
+        },
+        {
+            "name": "Stripe for FinDock",
+            "namespace": "phstr",
+            "versionId": ""
+        },
+        {
+            "name": "SEPA for FinDock",
+            "namespace": "paysepa",
+            "versionId": ""
+        },
+        {
+            "name": "FinDock for Fundraising",
+            "namespace": "fdff",
+            "versionId": "",
+            "for": [
+                "donation-fundraising",
+                "donation-fundraising-uk"
+            ]
+        },
+        {
+            "name": "GiftAid for FinDock",
+            "namespace": "gaid",
+            "versionId": "",
+            "for": "donation-fundraising-uk"
+        },
+        {
+            "name": "Nonprofit Success Pack",
+            "namespace": "npsp",
+            "versionId": "",
+            "for": "donation-npsp"
+        },
+        {
+            "name": "FinDock for NPSP",
+            "namespace": "npsp4hub",
+            "versionId": "",
+            "for": "donation-npsp"
+        }
+    ]
+}
