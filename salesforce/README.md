@@ -10,7 +10,7 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
 |---|---|
 | `lwc/donationFlow` | `c-donation-flow`: runs `Donation_Flow` with `lightning-flow`, takes `success-url` / `failure-url`, posts its height to the host page |
 | `lwc/invoicePayFlow` | `c-invoice-pay-flow`: runs `Checkout_Flow` for an installment (`installment-guid`), same messages |
-| `lwc/payLinkFlow` | `c-pay-link-flow`: runs `Pay_Link_Flow` (`record-guid`, `link-type`, `invoice-url`, `merchant-name`), same messages |
+| `lwc/payLinkFlow` | `c-pay-link-flow`: runs `Payment_Link_Flow` (`record-guid`, `link-type`, `invoice-url`, `merchant-name`), same messages |
 | `lightningOutApps/Lightning_Out_App` | The Lightning Out 2.0 app: lists every component the flows render (wrappers, template components, FinDock components). A component missing here fails to load inside Lightning Out. It lists the components for an org that runs every example (Checkout, NPSP donation and Payment Link templates). Each listed component must exist in the org, or the deploy fails: in an org with only some templates, remove the others' components (each template's README lists them); for a Fundraising donation flow add `c-transaction-fee-opt-in` |
 | `cspTrustedSites`, `corsWhitelistOrigins` | Examples for trusting a website (`https://www.example.org`): copy per website |
 | `lightning-out-site` (next to `force-app`) | The Lightning Out site itself (LWR, URL prefix `lightningout`), for a new org. Only the setup script deploys it, with your websites filled in, so it never overwrites a site an org already has |
@@ -24,7 +24,7 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
   |---|---|---|
   | `html-lightning-out-donation`, `react-multi-framework-lightning-out` | `Donation_Flow` | one of FinDock Experiences - NPSP, - Fundraising or - Fundraising UK |
   | `html-lightning-out-checkout-page` | `Checkout_Flow` | FinDock Experiences - Checkout |
-  | `html-lightning-out-checkout`, `html-lightning-out-pay-link` | `Pay_Link_Flow` | FinDock Experiences - Payment Link (and its `FinDockLabs_Pay_Link_Flow_Guest_Access` permission set) |
+  | `html-lightning-out-checkout`, `html-lightning-out-pay-link` | `Payment_Link_Flow` | FinDock Experiences - Payment Link (and its `FinDockLabs_Payment_Link_Flow_Guest_Access` permission set) |
 
   Get them in one of two ways:
 
@@ -39,7 +39,7 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
     sf project deploy start -o <alias> \
       -d sfdx-source/packages/checkout \
       -d sfdx-source/packages/donation-npsp \
-      -d sfdx-source/packages/pay-link
+      -d sfdx-source/packages/payment-link
     ```
 
     Pick the donation folder that fits your org (`donation-npsp`, `donation-fundraising` or

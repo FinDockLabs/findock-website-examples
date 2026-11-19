@@ -6,7 +6,7 @@ const GUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{
 
 // The link in an invoice or payment request email:
 //   ?id=<GUID>               an installment (invoice) or a recurring payment (change the payment method)
-//   &type=link               show it as a payment link (From / For) instead of an invoice (To / Invoice)
+//   &type=link               show it as a payment link (From / Description) instead of an invoice (To / Invoice)
 //   &invoice=<URL of a PDF>  show the invoice as a thumbnail that opens the PDF
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');

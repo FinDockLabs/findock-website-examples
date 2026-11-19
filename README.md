@@ -10,9 +10,9 @@ checkout and Payment Link templates. A pill in each site's header says which tec
 | Example | Built with | Form | Hosted on | Talks to FinDock through |
 |---|---|---|---|---|
 | [`examples/html-lightning-out-donation`](examples/html-lightning-out-donation) | Plain HTML, CSS, JavaScript | Salesforce Donation_Flow, embedded | Any static host (Netlify, Vercel, …) | Lightning Out 2.0 → flow → FinDock components |
-| [`examples/html-lightning-out-checkout`](examples/html-lightning-out-checkout) | Plain HTML, CSS, JavaScript | Salesforce Pay_Link_Flow, embedded in a customer portal with an invoice list | Any static host | Lightning Out 2.0 → flow → FinDock components |
+| [`examples/html-lightning-out-checkout`](examples/html-lightning-out-checkout) | Plain HTML, CSS, JavaScript | Salesforce Payment_Link_Flow, embedded in a customer portal with an invoice list | Any static host | Lightning Out 2.0 → flow → FinDock components |
 | [`examples/html-lightning-out-checkout-page`](examples/html-lightning-out-checkout-page) | Plain HTML, CSS, JavaScript | Salesforce Checkout_Flow on a page of its own (the checkout template, without a portal) | Any static host | Lightning Out 2.0 → flow → FinDock components |
-| [`examples/html-lightning-out-pay-link`](examples/html-lightning-out-pay-link) | Plain HTML, CSS, JavaScript | Salesforce Pay_Link_Flow: the page behind a "Pay now" link in an invoice or payment request email | Any static host | Lightning Out 2.0 → flow → FinDock components |
+| [`examples/html-lightning-out-pay-link`](examples/html-lightning-out-pay-link) | Plain HTML, CSS, JavaScript | Salesforce Payment_Link_Flow: the page behind a "Pay now" link in an invoice or payment request email | Any static host | Lightning Out 2.0 → flow → FinDock components |
 | [`examples/react-multi-framework-api`](examples/react-multi-framework-api) | React (Salesforce Multi-Framework) | Its own React form | Experience Cloud site | Apex REST → FinDock Payment API |
 | [`examples/react-multi-framework-lightning-out`](examples/react-multi-framework-lightning-out) | React (Salesforce Multi-Framework) | Salesforce Donation_Flow, embedded | Experience Cloud site | Lightning Out 2.0 → flow → FinDock components |
 

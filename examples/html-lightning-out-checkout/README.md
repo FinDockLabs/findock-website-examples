@@ -1,7 +1,7 @@
 # Customer portal: plain HTML + Lightning Out
 
 A customer portal in plain HTML, CSS and JavaScript where customers see their invoices and pay one, with FinDock's
-Salesforce **Pay_Link_Flow** embedded through **Lightning Out 2.0**: the same invoice card as the Payment Link template.
+Salesforce **Payment_Link_Flow** embedded through **Lightning Out 2.0**: the same invoice card as the Payment Link template.
 Each invoice is a FinDock installment; the portal passes its GUID to the flow.
 
 Fictional company: **Your company**, the neutral brand of the Experience Cloud checkout and Payment Link templates.
@@ -23,7 +23,7 @@ installments, or load them from your backend.
 ## Prerequisites
 
 The Salesforce side, once per org: see [salesforce/README.md](../../salesforce/README.md). You need a Lightning Out
-site, the Lightning Out app with `c-pay-link-flow`, and the Pay_Link_Flow from the Payment Link template package.
+site, the Lightning Out app with `c-pay-link-flow`, and the Payment_Link_Flow from the Payment Link template package.
 
 ## Configure
 

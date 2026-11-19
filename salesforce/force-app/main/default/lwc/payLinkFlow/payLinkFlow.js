@@ -7,7 +7,7 @@ const RESIZE_MESSAGE = 'findock-resize';
 export default class PayLinkFlow extends LightningElement {
     // GUID of the installment or recurring payment to pay (record-guid).
     @api recordGuid;
-    // "invoice" (default) or "link": an invoice shows To / Invoice rows, a payment link only From / For.
+    // "invoice" (default) or "link": an invoice shows To / Invoice rows, a payment link only From / Description.
     @api linkType;
     // Optional link to the invoice PDF, shown as a thumbnail in the card.
     @api invoiceUrl;

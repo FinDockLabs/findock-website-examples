@@ -1,7 +1,7 @@
 # Pay Link: plain HTML + Lightning Out
 
 The page behind a "Pay now" link in an invoice or payment request email, in plain HTML, CSS and JavaScript. FinDock's
-Salesforce **Pay_Link_Flow** is embedded through **Lightning Out 2.0**. It is the Experience Cloud Payment Link template
+Salesforce **Payment_Link_Flow** is embedded through **Lightning Out 2.0**. It is the Experience Cloud Payment Link template
 on your own website: the merchant name above one card with the amount, a short summary and the payment methods.
 
 Fictional company: **Your company**, the neutral brand of the Experience Cloud checkout and Payment Link templates.
@@ -20,7 +20,7 @@ Fictional company: **Your company**, the neutral brand of the Experience Cloud c
 | URL | Card |
 |---|---|
 | `index.html?id=<GUID>` | An invoice: amount, due date, To / From / Invoice / Memo, payment methods. The GUID is the installment's `cpm__GUID__c` |
-| `index.html?id=<GUID>&type=link` | The same record as a payment link: From and For only |
+| `index.html?id=<GUID>&type=link` | The same record as a payment link: From and Description only |
 | `index.html?id=<GUID>&invoice=<https URL of a PDF>` | Adds an invoice thumbnail that opens the PDF |
 | `index.html?id=<GUID of a recurring payment>` | Change the payment method of a recurring payment |
 
@@ -30,7 +30,7 @@ flow, so the page itself has no logic beyond reading the URL.
 ## Prerequisites
 
 The Salesforce side, once per org: see [salesforce/README.md](../../salesforce/README.md). You need the
-Pay_Link_Flow (from the Payment Link template package), the `checkoutStyles` static resource (Checkout Site template), `c-pay-link-flow` in the Lightning Out
+Payment_Link_Flow (from the Payment Link template package), the `checkoutStyles` static resource (Checkout Site template), `c-pay-link-flow` in the Lightning Out
 app, and the Lightning Out site's guest user with the Payment Link template's guest permission set.
 
 ## Configure

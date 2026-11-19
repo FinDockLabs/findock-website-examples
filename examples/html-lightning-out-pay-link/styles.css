@@ -1,6 +1,6 @@
 /* Pay link page: the neutral look of the Experience Cloud Pay Link template. A light-grey page with the
    merchant above one white card. The card itself (amount, rows, payment methods) is the Salesforce
-   Pay_Link_Flow, styled in Salesforce by the payLinkStyles static resource. */
+   Payment_Link_Flow, styled in Salesforce by the checkoutStyles static resource. */
 :root {
     --ink: #1A1D24;
     --brand: #1B2A5B;

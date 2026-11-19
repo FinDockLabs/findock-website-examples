@@ -21,7 +21,7 @@ document.getElementById('pay-title').textContent = `Pay invoice ${ref}`;
 const loading = document.getElementById('pay-loading');
 const loadingMessage = document.getElementById('loading-message');
 
-// The invoice card is the Pay_Link_Flow in Salesforce, run by the c-pay-link-flow wrapper component for the
+// The invoice card is the Payment_Link_Flow in Salesforce, run by the c-pay-link-flow wrapper component for the
 // installment (invoice) in the URL: amount, due date, a short summary, the PDF and the payment methods.
 // Hosted payments return to these pages.
 const here = new URL('.', window.location.href);

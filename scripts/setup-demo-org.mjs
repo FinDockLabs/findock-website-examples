@@ -185,7 +185,7 @@ step('Packages');
 
 step(`Payment experience templates from ${templatesRepo}`);
 // From source, so the components the Checkout and donation templates share are deployed once.
-deploy(['checkout', donationTemplate, 'pay-link'].map((folder) => `sfdx-source/packages/${folder}`),
+deploy(['checkout', donationTemplate, 'payment-link'].map((folder) => `sfdx-source/packages/${folder}`),
     { cwd: templatesRepo, label: `checkout, ${donationTemplate}, pay-link` });
 // Only the stylesheets, logos and icons of the site templates (the sites themselves aren't needed).
 deploy(['checkout-site', 'donation-site'].map((folder) => `sfdx-source/packages/${folder}/staticresources`),
@@ -278,7 +278,7 @@ step('Guest user permissions');
             ['cpm', 'FinDock_Core_Experience_Cloud_Run'],
             [null, 'FinDockLabs_Checkout_Flow_Guest_Access'],
             [null, 'FinDockLabs_Donation_Flow_Guest_Access'],
-            [null, 'FinDockLabs_Pay_Link_Flow_Guest_Access'],
+            [null, 'FinDockLabs_Payment_Link_Flow_Guest_Access'],
         ]) {
             const [ps] = query(`SELECT Id FROM PermissionSet WHERE Name = '${name}' AND NamespacePrefix = ${ns ? `'${ns}'` : 'null'}`);
             assign(ns ? `${ns}__${name}` : name, 'PermissionSetId', ps?.Id);
@@ -335,7 +335,7 @@ if (!['External', 'AllowAllFraming'].includes(lwrSite.ClickjackProtectionLevel))
 }
 manual.push(
     'ProcessingHub: connect the payment processors in test mode (e.g. Stripe test keys) and activate the payment methods.',
-    'Flow Builder: choose the payment methods on the Payment Method Selector of Checkout_Flow, Donation_Flow and Pay_Link_Flow (Pay_Link_Flow ships without a list).',
+    'Flow Builder: choose the payment methods on the Payment Method Selector of Checkout_Flow, Donation_Flow and Payment_Link_Flow (Payment_Link_Flow ships without a list).',
     'Pay link and portal examples: create the installments they link to (their GUIDs are in the examples\' HTML), or change the links.',
     'Recurring payment links: a guest sharing rule on the recurring object (see the Payment Link template README).',
     'Set each website\'s config.js to the values above and redeploy the websites.',
