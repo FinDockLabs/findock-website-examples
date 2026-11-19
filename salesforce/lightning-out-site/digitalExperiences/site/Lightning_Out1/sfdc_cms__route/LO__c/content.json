@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "LO",
+  "contentBody" : {
+    "activeViewId" : "LO",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "lightningOut2",
+    "urlPrefix" : "lightning-out"
+  },
+  "urlName" : "lo"
+}

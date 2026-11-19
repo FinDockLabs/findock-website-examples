@@ -1,0 +1,14 @@
+{
+  "type": "sfdc_cms__trustedSites",
+  "title": "trustedSites",
+  "contentBody": {
+    "trustedSites": [
+      {
+        "isActive": true,
+        "source": "{{WEBSITE_ORIGIN}}",
+        "sourceName": "{{WEBSITE_NAME}}"
+      }
+    ]
+  },
+  "urlName": "trustedsites"
+}

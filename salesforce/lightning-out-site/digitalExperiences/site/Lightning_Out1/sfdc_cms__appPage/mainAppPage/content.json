@@ -1,0 +1,12 @@
+{
+  "type": "sfdc_cms__appPage",
+  "title": "main",
+  "contentBody": {
+    "currentThemeId": "Build_Your_Own_LWR",
+    "headMarkup": "<title>Lightning Out</title>\n\n<!-- branding stylesheets -->\n\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part1.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part2.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part3.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part4.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-site-spacing-styling-hooks.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-styling-hooks.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-slds-extensions.min.css?{ versionKey }\" />\n\n\n\n<!-- branding stylesheets-->\n\n<link rel=\"stylesheet\" href=\"{ styles/styles.css }\" />\n<link rel=\"stylesheet\" href=\"{ styles/print.css }\" media=\"print\"/>\n\n<!-- FinDock flow styles and the site templates' stylesheets (checkoutStyles, canopyStyles) -->\n<link rel=\"stylesheet\" href=\"{ basePath }/sfsites/c/resource/findockAssets/dxp-styles.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/sfsites/c/resource/checkoutStyles?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/sfsites/c/resource/canopyStyles?{ versionKey }\" />\n<style>\n    html, body { background: transparent !important; overflow: hidden !important; }\n    body::before, body::after { display: none !important; }\n    .community_byo-scoped-header-and-footer__header-content,\n    .community_byo-scoped-header-and-footer__footer-content { display: none !important; }\n</style>\n",
+    "isLockerServiceEnabled": true,
+    "isRelaxedCSPLevel": false,
+    "templateName": "talon-template-byo"
+  },
+  "urlName": "main"
+}
