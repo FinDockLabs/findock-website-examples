@@ -21,19 +21,21 @@ document.getElementById('pay-title').textContent = `Pay invoice ${ref}`;
 const loading = document.getElementById('pay-loading');
 const loadingMessage = document.getElementById('loading-message');
 
-// The invoice card is the Payment_Link_Flow in Salesforce, run by the c-pay-link-flow wrapper component for the
+// The invoice card is the Payment_Link_Flow in Salesforce, run by the Lightning Out flow container for the
 // installment (invoice) in the URL: amount, due date, a short summary, the PDF and the payment methods.
 // Hosted payments return to these pages.
 const here = new URL('.', window.location.href);
 embedLightningOut({
     container: document.querySelector('.pay-embed'),
     config: LIGHTNING_OUT,
-    component: 'c-pay-link-flow',
     attributes: {
-        'record-guid': guid,
-        'link-type': 'invoice',
-        'merchant-name': 'Your company',
-        'invoice-url': new URL(`invoices/invoice-${ref}.pdf`, here).href,
+        'flow-api-name': 'Payment_Link_Flow',
+        'input-variables': JSON.stringify({
+            id: guid,
+            type: 'invoice',
+            merchantName: 'Your company',
+            invoiceUrl: new URL(`invoices/invoice-${ref}.pdf`, here).href,
+        }),
         'success-url': new URL(`thank-you.html?ref=${encodeURIComponent(ref)}`, here).href,
         'failure-url': new URL(`pay.html?invoice=${encodeURIComponent(guid)}&ref=${encodeURIComponent(ref)}`, here).href,
     },

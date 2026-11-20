@@ -93,14 +93,14 @@ main {
     padding-bottom: 56px;
 }
 
-/* Height is replaced by the checkout's own height once it reports it (findock-resize). */
+/* Height is replaced by the checkout's own height once it reports it (flow:height). */
 .checkout-embed {
     position: relative;
     height: 860px;
     margin: 0 -16px;
 }
 
-.checkout-embed c-invoice-pay-flow {
+.checkout-embed c-lightning-out-flow-container {
     display: block;
     height: 100%;
 }

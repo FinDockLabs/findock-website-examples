@@ -60,7 +60,7 @@ body {
     height: 32px;
 }
 
-/* Height is replaced by the card's own height once it reports it (findock-resize). Inside the frame the card
+/* Height is replaced by the card's own height once it reports it (flow:height). Inside the frame the card
    sits 13px from the edge (page margin plus room for its shadow); the negative margin lines it up with the
    merchant name. */
 .pay-embed {
@@ -69,7 +69,7 @@ body {
     margin: 0 -13px;
 }
 
-.pay-embed c-pay-link-flow {
+.pay-embed c-lightning-out-flow-container {
     display: block;
     height: 100%;
 }
