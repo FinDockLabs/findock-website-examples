@@ -419,7 +419,7 @@ tr:last-child td {
 }
 
 /* The invoice card: the Pay Link flow, centred under the page heading. Its height is replaced by the card's own
-   height once it reports it (findock-resize). Inside the frame the card sits 13px from the edge (page margin plus
+   height once it reports it (flow:height). Inside the frame the card sits 13px from the edge (page margin plus
    room for its shadow); the negative margin lines it up with the column. */
 .pay-embed {
     position: relative;
@@ -428,7 +428,7 @@ tr:last-child td {
     margin: 0 auto;
 }
 
-.pay-embed c-pay-link-flow {
+.pay-embed c-lightning-out-flow-container {
     display: block;
     height: 100%;
 }

@@ -12,16 +12,16 @@ Fictional charity: **Canopy Gibbon Trust**. The header pill reads "Lightning Out
 your website (any host)                          Salesforce (your org)
 ┌────────────────────────────┐                   ┌──────────────────────────────────────────┐
 │ index.html                 │  Lightning Out    │ Lightning Out site (/lightningout)       │
-│  └ #donate-embed           │ ────────────────▶ │  └ c-donation-flow (wrapper LWC)         │
+│  └ #donate-embed           │ ────────────────▶ │  └ c-lightning-out-flow-container        │
 │     lightning-out-         │   iframe          │     └ Donation_Flow (screen flow)        │
 │     application +          │ ◀──────────────── │        └ FinDock payment components      │
-│     <c-donation-flow>      │  postMessage:     │                                          │
-│                            │  height, redirect │                                          │
+│     <c-lightning-out-      │  postMessage:     │                                          │
+│      flow-container>       │  height, redirect │                                          │
 └────────────────────────────┘                   └──────────────────────────────────────────┘
 ```
 
 - `donate.js` calls `embedLightningOut()` from `shared/lightning-out-embed.js`: it adds the
-  `<lightning-out-application>` and `<c-donation-flow>` tags, loads the runtime, sizes the frame to the flow and
+  `<lightning-out-application>` and `<c-lightning-out-flow-container flow-api-name="Donation_Flow">` tags, loads the runtime, sizes the frame to the flow and
   follows redirects to hosted payment pages (iDEAL, PayPal).
 - The flow sends donors back to `thank-you.html` or `payment-failed.html` after a hosted payment.
 - `shared/` is a copy of the repo's `/shared` folder (brand CSS, page layout CSS, images, the embed module).
@@ -38,8 +38,8 @@ your website (any host)                          Salesforce (your org)
 ## Prerequisites
 
 The Salesforce side, once per org: see [salesforce/README.md](../../salesforce/README.md). You need a
-Lightning Out site, the Lightning Out app with `c-donation-flow`, and the Donation_Flow from a donation template
-package.
+Lightning Out site, the Lightning Out app with `c-lightning-out-flow-container` (Lightning Out Flow template package), and the Donation_Flow
+from a donation template package.
 
 ## Configure
 

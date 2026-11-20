@@ -8,10 +8,7 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
 
 | Path | What it is |
 |---|---|
-| `lwc/donationFlow` | `c-donation-flow`: runs `Donation_Flow` with `lightning-flow`, takes `success-url` / `failure-url`, posts its height to the host page |
-| `lwc/invoicePayFlow` | `c-invoice-pay-flow`: runs `Checkout_Flow` for an installment (`installment-guid`), same messages |
-| `lwc/payLinkFlow` | `c-pay-link-flow`: runs `Payment_Link_Flow` (`record-guid`, `link-type`, `invoice-url`, `merchant-name`), same messages |
-| `lightningOutApps/Lightning_Out_App` | The Lightning Out 2.0 app: lists every component the flows render (wrappers, template components, FinDock components). A component missing here fails to load inside Lightning Out. It lists the components for an org that runs every example (Checkout, NPSP donation and Payment Link templates). Each listed component must exist in the org, or the deploy fails: in an org with only some templates, remove the others' components (each template's README lists them); for a Fundraising donation flow add `c-transaction-fee-opt-in` |
+| `lightningOutApps/Lightning_Out_App` | The Lightning Out 2.0 app: lists every component the flows render (the flow container, template components, FinDock components). A component missing here fails to load inside Lightning Out. It lists the components for an org that runs every example (Checkout, NPSP donation and Payment Link templates). Each listed component must exist in the org, or the deploy fails: in an org with only some templates, remove the others' components (each template's README lists them); for a Fundraising donation flow add `c-transaction-fee-opt-in` |
 | `cspTrustedSites`, `corsWhitelistOrigins` | Examples for trusting a website (`https://www.example.org`): copy per website |
 | `lightning-out-site` (next to `force-app`) | The Lightning Out site itself (LWR, URL prefix `lightningout`), for a new org. Only the setup script deploys it, with your websites filled in, so it never overwrites a site an org already has |
 
@@ -26,6 +23,10 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
   | `html-lightning-out-checkout-page` | `Checkout_Flow` | FinDock Experiences - Checkout |
   | `html-lightning-out-checkout`, `html-lightning-out-pay-link` | `Payment_Link_Flow` | FinDock Experiences - Payment Link (and its `FinDockLabs_Payment_Link_Flow_Guest_Access` permission set) |
 
+  Every example also needs the Lightning Out flow container (`c-lightning-out-flow-container`) from FinDock
+  Experiences - Lightning Out Flow. It runs the flow named in `flow-api-name`, passes `success-url`, `failure-url`
+  and the `input-variables` JSON to it, and posts its height to the website.
+
   Get them in one of two ways:
 
   - **Install the packages**, one org per example set. The Checkout package and the donation packages contain the
@@ -39,7 +40,8 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
     sf project deploy start -o <alias> \
       -d sfdx-source/packages/checkout \
       -d sfdx-source/packages/donation-npsp \
-      -d sfdx-source/packages/payment-link
+      -d sfdx-source/packages/payment-link \
+      -d sfdx-source/packages/lightning-out-flow
     ```
 
     Pick the donation folder that fits your org (`donation-npsp`, `donation-fundraising` or
@@ -47,7 +49,7 @@ What the org needs so websites can embed FinDock's flows with Lightning Out 2.0.
     also be deployed from source.
 
   After either, follow each template's README: choose the payment methods in Flow Builder, assign its guest
-  permission set, and replace the example success and failure URLs. The wrappers pass the website's own
+  permission set, and replace the example success and failure URLs. The flow container passes the website's own
   `successUrl` and `failureUrl` to the flows, so the example URLs only apply when a flow runs on its own.
 - The styles from the site templates: `checkoutStyles` (checkout, checkout page and pay link examples) from FinDock
   Experiences - Checkout Site, and `canopyStyles` with the Canopy logos and icons (donation examples) from FinDock
@@ -92,10 +94,10 @@ A React app hosted on the same Experience Cloud domain needs none of that.
 1. Chatter, Digital Experiences and ExperienceBundle metadata on; your websites allowed in CORS, CSP and Lightning Out framing
 2. FinDock, ProcessingHub, the processors and FinDock for Fundraising (or NPSP and FinDock for NPSP with the NPSP
    donation flow): checks they're installed, or installs them when the config has their package version Ids
-3. The Checkout, donation and Payment Link templates, and the site templates' stylesheets, logos and icons, from a
+3. The Checkout, donation, Payment Link and Lightning Out Flow templates, and the site templates' stylesheets, logos and icons, from a
    clone of [payment-experiences-templates](https://github.com/FinDockLabs/payment-experiences-templates)
 4. The Lightning Out site from `lightning-out-site`, unless the org already has one
-5. The wrapper components and the Lightning Out app from `force-app`
+5. The Lightning Out flow container from the templates and the Lightning Out app from `force-app`
 6. Publishes the site, gives its guest user the FinDock Payer permission set group and the templates' guest
    permission sets, and links the Lightning Out app to the site
 7. Prints the `config.js` values for the websites and the steps that are left to do by hand
@@ -112,6 +114,9 @@ Edition created in the Environment Hub from Salesforce's Nonprofit Cloud Trialfo
 Accounts (the Fundraising flows create the donor as a person account). Set `donationTemplate` to `donation-npsp` for
 an NPSP org.
 
+For an org that already has the template packages installed, set `"templatesFromSource": false`: step 3 then only
+deploys the Lightning Out flow container, because a component that a package owns can't also be deployed from source.
+
 Every step checks the org first, so you can run it again after fixing a failure. `--update-site` also overwrites an
 existing Lightning Out site from `lightning-out-site`. `scripts/demo-org.config.json` is ignored by git.
 
@@ -123,5 +128,4 @@ Builder (only Experience Builder can set it).
 ## Sharing an org
 
 If several people use the same org for Lightning Out demos, **merge** into the Lightning Out app's component list and
-the site's trusted domains instead of replacing them, and give wrapper components specific names (`c-invoice-pay-flow`,
-not `c-pay-flow`). Deploying this folder's `Lightning_Out_App` replaces the whole component list.
+the site's trusted domains instead of replacing them. Deploying this folder's `Lightning_Out_App` replaces the whole component list.

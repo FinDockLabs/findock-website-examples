@@ -41,7 +41,7 @@ shared/
   lightning-out/ lightning-out-embed.js: loads Lightning Out, sizes the frame, follows payment redirects
   example-bar/   example-bar.js: the "Example" strip on the hosted demos, with links between the examples
   react/         React versions of the page sections and a <LightningOutEmbed> component
-salesforce/      Salesforce metadata the Lightning Out examples need (wrapper components, app); flows and styles come from the template packages
+salesforce/      Salesforce metadata the Lightning Out examples need (Lightning Out site and app); the flow container, flows and styles come from the template packages
 scripts/         sync-shared.mjs: copies /shared into the plain-HTML examples
                  setup-demo-org.mjs: sets up an org for every Lightning Out example (salesforce/README.md)
 ```

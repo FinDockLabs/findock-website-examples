@@ -90,7 +90,10 @@ function warmUpCheckout() {
         return;
     }
     const guid = new URL(next.href).searchParams.get('invoice');
-    warmUpLightningOut({ config: LIGHTNING_OUT, component: 'c-pay-link-flow', attributes: { 'record-guid': guid } });
+    warmUpLightningOut({
+        config: LIGHTNING_OUT,
+        attributes: { 'flow-api-name': 'Payment_Link_Flow', 'input-variables': JSON.stringify({ id: guid }) },
+    });
 }
 
 markPaidRows();

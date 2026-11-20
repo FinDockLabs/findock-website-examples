@@ -14,18 +14,22 @@ const type = params.get('type') === 'link' ? 'link' : 'invoice';
 const invoiceUrl = params.get('invoice');
 
 const here = new URL('.', window.location.href);
-const attributes = {
+const inputs = {
     // Without a valid id the flow shows its own "This link is not valid" message.
-    'record-guid': id && GUID_PATTERN.test(id) ? id : 'missing',
-    'link-type': type,
-    'merchant-name': 'Your company',
+    id: id && GUID_PATTERN.test(id) ? id : 'missing',
+    type,
+    merchantName: 'Your company',
+};
+if (invoiceUrl && /^https:\/\//.test(invoiceUrl)) {
+    inputs.invoiceUrl = invoiceUrl;
+}
+const attributes = {
+    'flow-api-name': 'Payment_Link_Flow',
+    'input-variables': JSON.stringify(inputs),
     'success-url': new URL('payment-received.html', here).href,
     // A failed or cancelled hosted payment comes back to this same page.
     'failure-url': window.location.href,
 };
-if (invoiceUrl && /^https:\/\//.test(invoiceUrl)) {
-    attributes['invoice-url'] = invoiceUrl;
-}
 
 const loading = document.getElementById('pay-loading');
 const loadingMessage = document.getElementById('loading-message');
@@ -33,7 +37,6 @@ const loadingMessage = document.getElementById('loading-message');
 embedLightningOut({
     container: document.querySelector('.pay-embed'),
     config: LIGHTNING_OUT,
-    component: 'c-pay-link-flow',
     attributes,
     // The "paid" and "not valid" cards are short, so count anything from 150px as loaded.
     loadedMinHeight: 150,

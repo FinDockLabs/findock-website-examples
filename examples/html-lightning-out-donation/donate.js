@@ -7,14 +7,14 @@ const embed = document.getElementById('donate-embed');
 const loading = document.getElementById('donate-loading');
 const loadingMessage = document.getElementById('loading-message');
 
-// The donation form is the Donation_Flow in Salesforce, run by the c-donation-flow wrapper component.
+// The donation form is the Donation_Flow in Salesforce, run by the Lightning Out flow container.
 // The flow sends the donor back to these pages after a hosted payment (iDEAL, PayPal, ...).
 const here = new URL('.', window.location.href);
 embedLightningOut({
     container: embed,
     config: LIGHTNING_OUT,
-    component: 'c-donation-flow',
     attributes: {
+        'flow-api-name': 'Donation_Flow',
         'success-url': new URL('thank-you.html', here).href,
         'failure-url': new URL('payment-failed.html', here).href,
     },

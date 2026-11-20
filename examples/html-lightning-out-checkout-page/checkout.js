@@ -11,12 +11,13 @@ const validGuid = guid && GUID_PATTERN.test(guid) ? guid : null;
 
 const here = new URL('.', window.location.href);
 const attributes = {
+    'flow-api-name': 'Checkout_Flow',
     'success-url': new URL('payment-received.html', here).href,
     // A failed or cancelled hosted payment comes back to this same checkout.
     'failure-url': window.location.href,
 };
 if (validGuid) {
-    attributes['installment-guid'] = validGuid;
+    attributes['input-variables'] = JSON.stringify({ id: validGuid });
 }
 
 const loading = document.getElementById('checkout-loading');
@@ -25,7 +26,6 @@ const loadingMessage = document.getElementById('loading-message');
 embedLightningOut({
     container: document.querySelector('.checkout-embed'),
     config: LIGHTNING_OUT,
-    component: 'c-invoice-pay-flow',
     attributes,
     onLoaded: hideLoading,
 });

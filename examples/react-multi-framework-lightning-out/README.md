@@ -7,7 +7,7 @@ with FinDock's **Donation_Flow** embedded through **Lightning Out 2.0**. Same pa
 | Path | What it is |
 |---|---|
 | `force-app/main/default/uiBundles/DonateLightningOut/` | The React + Vite + TypeScript app |
-| `…/src/pages/Donate.tsx` | Page sections from `/shared/react/canopy.tsx` plus `<LightningOutEmbed component="c-donation-flow">` |
+| `…/src/pages/Donate.tsx` | Page sections from `/shared/react/canopy.tsx` plus `<LightningOutEmbed>` with `flow-api-name="Donation_Flow"` |
 | `…/src/config.ts` | Lightning Out settings |
 | `…/scripts/fetch-lightning-out.mjs` | Downloads the Lightning Out runtime into the app at build time (see "Why the runtime is bundled") |
 | `force-app/main/default/networks`, `sites`, `digitalExperienceConfigs`, `digitalExperiences` | The `Donate Lightning Out` Experience site that hosts the app at `/donatelo` |
