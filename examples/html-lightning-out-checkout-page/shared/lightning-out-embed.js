@@ -9,10 +9,12 @@
  * - follows redirects to a hosted payment page (the FinDock pay button can't navigate the top window itself);
  * - tells you when the component has actually rendered, so you can hide a loading skeleton.
  *
- * The height and redirect messages are posted by the wrapper component in Salesforce (c-donation-flow,
- * c-invoice-pay-flow; see /salesforce). They are only accepted from the Experience Cloud site that hosts it.
+ * The component is the Lightning Out flow container (c-lightning-out-flow-container) from the FinDock payment
+ * experiences templates: it runs the flow named in flow-api-name and posts its height. The FinDock Pay Button posts
+ * the redirects. Both are only accepted from the Experience Cloud site that hosts them.
  */
 
+const FLOW_CONTAINER = 'c-lightning-out-flow-container';
 const loadedRuntimes = new Map();
 
 /**
@@ -46,8 +48,9 @@ export function loadLightningOutRuntime(runtimeUrl) {
  * @param {object} options
  * @param {HTMLElement} options.container        Element the component is rendered in; its height follows the component.
  * @param {LightningOutConfig} options.config
- * @param {string} options.component             Component tag, e.g. "c-donation-flow".
- * @param {Record<string, string>} [options.attributes] Attributes for the component (kebab-case), e.g. {"success-url": "..."}.
+ * @param {string} [options.component='c-lightning-out-flow-container'] Component tag.
+ * @param {Record<string, string>} [options.attributes] Attributes for the component (kebab-case), e.g.
+ *     {"flow-api-name": "Donation_Flow", "success-url": "...", "input-variables": JSON.stringify({ id: "..." })}.
  * @param {number} [options.loadedMinHeight=400] Heights below this are the component's own loading state, not content.
  * @param {(height: number) => void} [options.onResize]
  * @param {() => void} [options.onLoaded]        Called once, on the first height at or above loadedMinHeight.
@@ -57,7 +60,7 @@ export function loadLightningOutRuntime(runtimeUrl) {
 export function embedLightningOut({
     container,
     config,
-    component,
+    component = FLOW_CONTAINER,
     attributes = {},
     loadedMinHeight = 400,
     onResize,
@@ -89,7 +92,7 @@ export function embedLightningOut({
         if (data?.type === 'findock-redirect' && typeof data.url === 'string' && data.url.startsWith('https://')) {
             onRedirect(data.url);
         }
-        if (data?.type === 'findock-resize' && Number.isFinite(data.height) && data.height > 0) {
+        if (data?.type === 'flow:height' && Number.isFinite(data.height) && data.height > 0) {
             if (!loaded && data.height < loadedMinHeight) {
                 return;
             }
@@ -117,9 +120,9 @@ export function embedLightningOut({
  * Salesforce starts a flow slowly when its cache is cold (after a deploy or a quiet period). Start one invisible
  * instance early, for example on a list page before the visitor clicks "Pay now", so the real one opens warm.
  * Removed again once it has rendered, or after a minute.
- * @param {{ config: LightningOutConfig, component: string, attributes?: Record<string, string> }} options
+ * @param {{ config: LightningOutConfig, component?: string, attributes?: Record<string, string> }} options
  */
-export function warmUpLightningOut({ config, component, attributes = {} }) {
+export function warmUpLightningOut({ config, component = FLOW_CONTAINER, attributes = {} }) {
     const holder = document.createElement('div');
     holder.setAttribute('aria-hidden', 'true');
     holder.inert = true;

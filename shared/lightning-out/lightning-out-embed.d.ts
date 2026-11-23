@@ -12,7 +12,8 @@ export interface LightningOutConfig {
 export interface EmbedOptions {
     container: HTMLElement;
     config: LightningOutConfig;
-    component: string;
+    /** Defaults to the Lightning Out flow container, c-lightning-out-flow-container. */
+    component?: string;
     attributes?: Record<string, string>;
     loadedMinHeight?: number;
     onResize?: (height: number) => void;
@@ -22,4 +23,4 @@ export interface EmbedOptions {
 
 export function loadLightningOutRuntime(runtimeUrl: string): Promise<void>;
 export function embedLightningOut(options: EmbedOptions): { destroy: () => void };
-export function warmUpLightningOut(options: { config: LightningOutConfig; component: string; attributes?: Record<string, string> }): void;
+export function warmUpLightningOut(options: { config: LightningOutConfig; component?: string; attributes?: Record<string, string> }): void;

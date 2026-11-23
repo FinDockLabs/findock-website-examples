@@ -1,6 +1,6 @@
 // Sets up a Salesforce org for the Lightning Out examples: one org that runs every example, with the flows and
 // styles deployed from the payment experiences templates (source, not packages) and the Lightning Out site, app
-// and wrappers from this repository.
+// from this repository.
 //
 //   cp scripts/demo-org.config.example.json scripts/demo-org.config.json   # then fill it in
 //   node scripts/setup-demo-org.mjs [path/to/config.json] [--dry-run] [--update-site]
@@ -37,6 +37,8 @@ const org = config.targetOrg;
 // Relative to this repository, e.g. ../payment-experiences-templates for a clone next to it.
 const templatesRepo = resolve(root, config.templatesRepo ?? '../payment-experiences-templates');
 const donationTemplate = config.donationTemplate ?? 'donation-npsp';
+// false for an org with the template packages installed: a component a package owns can't be deployed from source.
+const templatesFromSource = config.templatesFromSource ?? true;
 const websites = (config.websites ?? []).map((url) => new URL(url).origin);
 const packagesDir = join(templatesRepo, 'sfdx-source/packages');
 
@@ -184,12 +186,17 @@ step('Packages');
 // ---------- 4. templates ----------
 
 step(`Payment experience templates from ${templatesRepo}`);
-// From source, so the components the Checkout and donation templates share are deployed once.
-deploy(['checkout', donationTemplate, 'payment-link'].map((folder) => `sfdx-source/packages/${folder}`),
-    { cwd: templatesRepo, label: `checkout, ${donationTemplate}, pay-link` });
-// Only the stylesheets, logos and icons of the site templates (the sites themselves aren't needed).
-deploy(['checkout-site', 'donation-site'].map((folder) => `sfdx-source/packages/${folder}/staticresources`),
-    { cwd: templatesRepo, label: 'site template styles, logos and icons' });
+if (templatesFromSource) {
+    // From source, so the components the Checkout and donation templates share are deployed once.
+    deploy(['checkout', donationTemplate, 'payment-link', 'lightning-out-flow'].map((folder) => `sfdx-source/packages/${folder}`),
+        { cwd: templatesRepo, label: `checkout, ${donationTemplate}, payment-link, lightning-out-flow` });
+    // Only the stylesheets, logos and icons of the site templates (the sites themselves aren't needed).
+    deploy(['checkout-site', 'donation-site'].map((folder) => `sfdx-source/packages/${folder}/staticresources`),
+        { cwd: templatesRepo, label: 'site template styles, logos and icons' });
+} else {
+    // The flows and styles come from the installed template packages; only the flow container is deployed.
+    deploy(['sfdx-source/packages/lightning-out-flow'], { cwd: templatesRepo, label: 'lightning-out-flow' });
+}
 
 // ---------- 5. Lightning Out site ----------
 
@@ -218,13 +225,12 @@ if (existingSite.length && !process.argv.includes('--update-site')) {
     rmSync(dir, { recursive: true, force: true });
 }
 
-// ---------- 6. wrappers and Lightning Out app ----------
+// ---------- 6. Lightning Out app ----------
 
-step('Wrapper components and the Lightning Out app');
+step('Lightning Out app');
 {
     const dir = tempProject();
     const base = join(dir, 'force-app/main/default');
-    cpSync(join(root, 'salesforce/force-app/main/default/lwc'), join(base, 'lwc'), { recursive: true });
     cpSync(join(root, 'salesforce/force-app/main/default/lightningOutApps'), join(base, 'lightningOutApps'), { recursive: true });
     const appFile = join(base, 'lightningOutApps/Lightning_Out_App.lightningOutApp-meta.xml');
     let app = readFileSync(appFile, 'utf8');
@@ -235,10 +241,10 @@ step('Wrapper components and the Lightning Out app');
     writeFileSync(appFile, app);
     if (DRY_RUN) {
         // The app lists template components that a dry run only validated, so the org doesn't have them yet.
-        rmSync(join(base, 'lightningOutApps'), { recursive: true, force: true });
         console.log('   - the Lightning Out app is checked in a real run, after the templates are deployed');
+    } else {
+        deploy(['force-app'], { cwd: dir, label: 'app' });
     }
-    deploy(['force-app'], { cwd: dir, label: DRY_RUN ? 'wrappers' : 'wrappers and app' });
     rmSync(dir, { recursive: true, force: true });
 }
 

@@ -8,7 +8,7 @@ Fictional company: **Your company**, the neutral brand of the Experience Cloud c
 
 | File | What it is |
 |---|---|
-| `index.html`, `pay-link.js` | The pay link page. Embeds `c-pay-link-flow`, shows a skeleton card until it's ready |
+| `index.html`, `pay-link.js` | The pay link page. Embeds the Payment_Link_Flow in the Lightning Out flow container, shows a skeleton card until it's ready |
 | `payment-received.html` | Return page after a successful hosted payment |
 | `config.js` | Your org's Lightning Out settings |
 | `styles.css` | The page's look (grey page, merchant name, skeleton, footer) |
@@ -30,8 +30,8 @@ flow, so the page itself has no logic beyond reading the URL.
 ## Prerequisites
 
 The Salesforce side, once per org: see [salesforce/README.md](../../salesforce/README.md). You need the
-Payment_Link_Flow (from the Payment Link template package), the `checkoutStyles` static resource (Checkout Site template), `c-pay-link-flow` in the Lightning Out
-app, and the Lightning Out site's guest user with the Payment Link template's guest permission set.
+Payment_Link_Flow (from the Payment Link template package), the `checkoutStyles` static resource (Checkout Site template), `c-lightning-out-flow-container` (Lightning Out Flow template package) in the
+Lightning Out app, and the Lightning Out site's guest user with the Payment Link template's guest permission set.
 
 ## Configure
 

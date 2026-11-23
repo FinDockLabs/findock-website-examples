@@ -9,9 +9,9 @@ const SLOW_AFTER_MS = 15000;
 
 interface LightningOutEmbedProps {
     config: LightningOutConfig;
-    /** Component tag, e.g. "c-donation-flow". */
-    component: string;
-    /** Component attributes (kebab-case). Read once, when the embed starts. */
+    /** Component tag; defaults to the Lightning Out flow container (c-lightning-out-flow-container). */
+    component?: string;
+    /** Component attributes (kebab-case), e.g. flow-api-name. Read once, when the embed starts. */
     attributes?: Record<string, string>;
     /** Accessible name of the loading state. */
     loadingLabel?: string;

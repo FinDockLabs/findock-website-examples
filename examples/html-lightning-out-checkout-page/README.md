@@ -11,7 +11,7 @@ Fictional company: **Your company**, the neutral brand of the Experience Cloud c
 
 | File | What it is |
 |---|---|
-| `index.html`, `checkout.js` | The checkout page. Embeds `c-invoice-pay-flow`, shows a loading skeleton until it's ready |
+| `index.html`, `checkout.js` | The checkout page. Embeds the Checkout_Flow in the Lightning Out flow container, shows a loading skeleton until it's ready |
 | `payment-received.html` | Return page after a successful payment |
 | `config.js` | Your org's Lightning Out settings |
 | `styles.css` | The page's look (header, footer, skeleton) |
@@ -31,7 +31,8 @@ the payment failed or was cancelled.
 ## Prerequisites
 
 The Salesforce side, once per org: see [salesforce/README.md](../../salesforce/README.md). You need a Lightning Out
-site, the Lightning Out app with `c-invoice-pay-flow`, and the Checkout_Flow from the Checkout template package.
+site, the Lightning Out app with `c-lightning-out-flow-container` (Lightning Out Flow template package), and the Checkout_Flow from the Checkout
+template package.
 
 ## Configure
 

@@ -9,7 +9,7 @@ Fictional company: **Your company**, the neutral brand of the Experience Cloud c
 | File | What it is |
 |---|---|
 | `index.html`, `portal.js` | Invoice list with status, totals and "Pay now" buttons. Warms up the pay link in the background (Salesforce starts a flow slowly when its cache is cold) |
-| `pay.html`, `pay.js` | Pay page: the invoice card (`c-pay-link-flow`) for `?invoice=<installment GUID>&ref=<INST-number>`, with the invoice PDF as a thumbnail |
+| `pay.html`, `pay.js` | Pay page: the invoice card (Payment_Link_Flow in the Lightning Out flow container) for `?invoice=<installment GUID>&ref=<INST-number>`, with the invoice PDF as a thumbnail |
 | `thank-you.html` | Return page after payment; marks the invoice as paid in this browser (demo only) |
 | `config.js` | Your org's Lightning Out settings |
 | `invoices/` | Sample invoice PDFs. Their QR code opens the [Pay Link example](../html-lightning-out-pay-link) |
@@ -23,7 +23,8 @@ installments, or load them from your backend.
 ## Prerequisites
 
 The Salesforce side, once per org: see [salesforce/README.md](../../salesforce/README.md). You need a Lightning Out
-site, the Lightning Out app with `c-pay-link-flow`, and the Payment_Link_Flow from the Payment Link template package.
+site, the Lightning Out app with `c-lightning-out-flow-container` (Lightning Out Flow template package), and the Payment_Link_Flow from the Payment
+Link template package.
 
 ## Configure
 

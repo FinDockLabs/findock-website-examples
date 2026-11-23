@@ -3,10 +3,7 @@
     <applicationName>Lightning Out App</applicationName>
     <components>
         <component>
-            <componentName>c-donation-flow</componentName>
-        </component>
-        <component>
-            <componentName>c-invoice-pay-flow</componentName>
+            <componentName>c-lightning-out-flow-container</componentName>
         </component>
         <component>
             <componentName>c-amount-and-frequency</componentName>
@@ -16,9 +13,6 @@
         </component>
         <component>
             <componentName>c-experience-progress-stages</componentName>
-        </component>
-        <component>
-            <componentName>c-pay-link-flow</componentName>
         </component>
         <component>
             <componentName>c-get-user-agent-info</componentName>
